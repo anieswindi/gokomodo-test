@@ -1,0 +1,25 @@
+// Themes
+@import 'themes';
+
+// Helpers
+@import 'helpers';
+
+// Templates
+@import 'templates';
+
+// Elements
+@import 'elements';
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: rgb(220 211 148 / 73%);
+	overflow-y: auto !important;
+	@include scroll-custom();
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}

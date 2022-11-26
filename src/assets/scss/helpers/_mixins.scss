@@ -1,0 +1,143 @@
+/* ==========================================================================
+   MIXIN
+   ========================================================================== */
+
+@mixin mq-container($minWidth, $maxWidth) {
+	@media (min-width: $minWidth) {
+		.container {
+			max-width: $maxWidth;
+		}
+	}
+}
+
+@mixin mq-full-container($minWidth, $maxWidth) {
+	@media (min-width: $minWidth) {
+		.full-container {
+			max-width: $maxWidth;
+			margin: auto;
+		}
+	}
+}
+@mixin grid-gap($gap: 2rem) {
+	display: grid;
+	grid-gap: $gap;
+}
+@mixin mq($breakpoints) {
+	@if ($breakpoints) {
+		@media only screen and (max-width: $breakpoints) {
+			@content;
+		}
+	} @else {
+		@media only screen and (max-width: $s-small) {
+			@content;
+		}
+	}
+}
+@mixin min($breakpoints) {
+	@media only screen and (min-width: $breakpoints) {
+		@content;
+	}
+}
+@mixin minmax($min-breakpoints, $max-breakpoints) {
+	@media only screen and (min-width: $min-breakpoints) and (max-width: $max-breakpoints) {
+		@content;
+	}
+}
+@mixin max($breakpoints) {
+	@media only screen and (max-width: calc(#{$breakpoints} - 1px)) {
+		@content;
+	}
+}
+@mixin mmin($breakpoints) {
+	@if ($breakpoints) {
+		@media only screen and (min-width: $breakpoints) {
+			@content;
+		}
+	} @else {
+		@media only screen and (min-width: $s-small) {
+			@content;
+		}
+	}
+}
+
+@mixin large {
+	@media only screen and (max-width: 1440px) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media only screen and (max-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin smartphone {
+	@media only screen and (max-width: 480px) {
+		@content;
+	}
+}
+
+@mixin phone {
+	@media only screen and (max-width: 320px) {
+		@content;
+	}
+}
+
+@mixin border-box {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+@mixin scroll-custom($theme: grey) {
+	@if $theme==grey {
+		/* width */
+		&::-webkit-scrollbar {
+			width: 10px;
+			height: 10px;
+			border-radius: 5rem;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 5rem;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: #ddd;
+			border-radius: 5rem;
+		}
+
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background: #d6d6d6;
+		}
+	} @else if $theme==orange {
+		/* width */
+		&::-webkit-scrollbar {
+			width: 10px;
+			height: 10px;
+			border-radius: 5rem;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: $color-grey7;
+			border-radius: 5rem;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: $color-orange2;
+			border-radius: 5rem;
+		}
+
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background: rgba(252, 170, 96, 0.8);
+		}
+	}
+}

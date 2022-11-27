@@ -20,4 +20,14 @@ async function apiClient(method = 'get', endpoint = '', params = {}) {
 	}
 }
 
-export { apiClient };
+function padTo2Digits(num) {
+	return num.toString().padStart(2, '0');
+}
+
+function formatDate(date) {
+
+    const currDate = new Date(date)
+	return [padTo2Digits(currDate.getDate()), padTo2Digits(currDate.getMonth() + 1), currDate.getFullYear()].join('/');
+}
+
+export { apiClient, formatDate };

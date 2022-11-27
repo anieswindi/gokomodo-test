@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { apiClient } from '../../src/utils/Helpers';
+import { apiClient, formatDate } from '../../src/utils/Helpers';
 import Default from '../../src/assets/image/default-movie.png';
 
 function ComicDetails(props) {
@@ -18,8 +18,6 @@ function ComicDetails(props) {
 		try {
 			const response = await apiClient('get', 'comics/' + id);
 
-			console.log('resss', response);
-
 			if (response.code === 200) {
 				setData(response.payload.results[0]);
 				setTitle(response.payload.results[0]?.title);
@@ -31,22 +29,22 @@ function ComicDetails(props) {
 				setCreators(createdBy);
 			}
 		} catch (err) {
-			console.log(err);
+			throw err
 		}
 	};
 
-	document.title = title || 'Movie Details';
+	document.title = title || 'Comic Details';
 	return (
 		<div className='container comic-details'>
 			<div className='content'>
 				<div className='back'>
 					<a href='/'>
-						<i class='arrow left'></i>
+						<i className='arrow left'></i>
 						<span>Back</span>
 					</a>
 				</div>
 				<div className='info'>
-					<div className='wrap-image'>
+					<div className='wrap-image skeleton-image'>
 						<img src={data && data.thumbnail ? data.thumbnail.path + '.' + data.thumbnail.extension : Default} alt='ImgDetails' />
 					</div>
 					<div className='wrap-description'>
@@ -57,7 +55,7 @@ function ComicDetails(props) {
 								<strong>Published:</strong>
 							</div>
 
-							<div>{publised}</div>
+							<div>{formatDate(publised)}</div>
 
 							<ul>
 								{creators &&

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Paginate } from '../components';
+import { LoaderEllipsis, Paginate } from '../components';
 import { apiClient } from '../../src/utils/Helpers';
 import Default from '../../src/assets/image/default-movie.png';
 
@@ -11,6 +11,7 @@ let Param = {
 
 function Home(props) {
 	const [currentPage, setCurrentPage] = useState(1);
+	const [isLoading, setLoading] = useState(false);
 	const [comics, setComics] = useState([]);
 
 	const firstPageIndex = (currentPage - 1) * PageSize;
@@ -22,37 +23,47 @@ function Home(props) {
 
 	const getComics = async () => {
 		try {
+			setLoading(true);
 			const response = await apiClient('get', 'comics', Param);
 
 			if (response.code === 200) {
 				setComics(response.payload.results);
 			}
+
+			setTimeout(() => {
+				setLoading(false);
+			}, 1000);
 		} catch (err) {
-			console.log(err);
+			throw err
+			setLoading(false);
 		}
 	};
 
-	document.title = 'Gokomodo Test';
+	document.title = 'Comics Marvel';
 
 	return (
 		<div className='container home'>
 			<h1>Comics Marvel</h1>
 			<div className='wrap list'>
-				{comics &&
-					comics.length > 0 &&
-					comics.slice(firstPageIndex, lastPageIndex).map((comic) => (
-						<a key={'comic-' + comic.id} id={'comic-' + comic.id} className='content' href={'/' + comic.id}>
-							<div className='picture skeleton-image'>
-								<img src={comic.thumbnail && comic.thumbnail.path ? comic.thumbnail.path + '.' + comic.thumbnail.extension : Default} alt={'Image-' + comic.id} />
-							</div>
+				{comics && comics.length > 0
+					? comics.slice(firstPageIndex, lastPageIndex).map((comic) => (
+							<a key={'comic-' + comic.id} id={'comic-' + comic.id} className='content' href={'/' + comic.id}>
+								<div className='picture skeleton-image'>
+									<img src={comic.thumbnail && comic.thumbnail.path ? comic.thumbnail.path + '.' + comic.thumbnail.extension : Default} alt={'Image-' + comic.id} />
+								</div>
 
-							<div className='details'>
-								<h2>{comic.title}</h2>
+								<div className='details'>
+									<h2>{comic.title}</h2>
 
-								<span></span>
+									<span></span>
+								</div>
+							</a>
+					  ))
+					: isLoading && (
+							<div>
+								<LoaderEllipsis />
 							</div>
-						</a>
-					))}
+					  )}
 			</div>
 
 			<div className='wrap paginate'>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paginate } from '../components';
 import { apiClient } from '../../src/utils/Helpers';
 import Default from '../../src/assets/image/default-movie.png';
@@ -32,9 +32,11 @@ function Home(props) {
 		}
 	};
 
+	document.title = 'Gokomodo Test';
+
 	return (
 		<div className='container home'>
-            <h1>Comics Marvel</h1>
+			<h1>Comics Marvel</h1>
 			<div className='wrap list'>
 				{comics &&
 					comics.length > 0 &&

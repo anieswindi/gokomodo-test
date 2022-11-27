@@ -1,0 +1,102 @@
+.container.comic-details {
+	padding: 0 20px;
+	margin: 0 auto;
+	max-width: 1240px;
+	width: 100%;
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin: 2rem 0;
+
+		.back {
+			a {
+				text-decoration: none;
+				font-weight: 700;
+
+				.arrow {
+					border: solid black;
+					border-width: 0 3px 3px 0;
+					display: inline-block;
+					padding: 3px;
+					margin-right: 0.75rem;
+
+					&.left {
+						transform: rotate(135deg);
+						-webkit-transform: rotate(135deg);
+					}
+				}
+
+				&:hover {
+					color: rgb(135 128 74);
+				}
+			}
+		}
+		.info {
+			display: flex;
+			flex-wrap: wrap;
+
+			.wrap {
+				&-image {
+					padding: 0 50px 50px 0;
+					width: auto;
+					max-width: 100%;
+					flex: 1;
+					max-width: 350px;
+					min-width: 178px;
+
+					img {
+						width: 100%;
+						height: auto;
+						float: left;
+					}
+				}
+
+				&-description {
+					width: auto;
+					max-width: 100%;
+					// font-family: 'Roboto';
+					flex: 1;
+					font-size: 14px;
+
+					h1 {
+						margin: 0 0 1rem 0;
+					}
+
+					.meta {
+						font-size: 16px;
+						margin-bottom: 30px;
+
+						ul {
+							display: flex;
+							flex-wrap: wrap;
+							list-style: none;
+							margin: 20px 0 0 0;
+							padding: 0;
+
+							li {
+								flex: 0 0 50%;
+								margin-bottom: 20px;
+							}
+
+							span {
+								text-decoration: none;
+								margin: unset;
+							}
+						}
+					}
+
+					.detail {
+						margin: 0 0 0.6em 0;
+						max-width: 430px;
+						line-height: 1.3em;
+					}
+
+					.other {
+					}
+				}
+			}
+		}
+	}
+}
